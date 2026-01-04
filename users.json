@@ -1,0 +1,45 @@
+{
+  "karthikabk2020@gmail.com": {
+    "password": "karthik",
+    "name": "karthik",
+    "gender": "Male",
+    "country": "India",
+    "amount": 2100.0
+  },
+  "studentguiderforyou@gmail.com": {
+    "password": "manvi@2005",
+    "name": "manvita",
+    "gender": "Female",
+    "country": "India",
+    "amount": 20000.0,
+    "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
+    "created_at": "2025-10-09T21:02:10.187380"
+  },
+  "methodvirtual040@gmail.com": {
+    "password": "karthik@2005",
+    "name": "karthik",
+    "gender": "Male",
+    "country": "India",
+    "amount": 24500.0,
+    "avatar": "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=150&h=150&fit=crop&crop=face",
+    "created_at": "2025-10-09T21:55:18.541093"
+  },
+  "hmabuthwahir@gmail.com": {
+    "password": "khhhhhs",
+    "name": "KARTHIK BK",
+    "gender": "Male",
+    "country": "India",
+    "amount": 323.0,
+    "avatar": "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=150&h=150&fit=crop&crop=face",
+    "created_at": "2025-10-23T14:51:09.880281"
+  },
+  "pes1202203235@pesu.pes.edu": {
+    "password": "khhhhhs",
+    "name": "KARTHIK BK",
+    "gender": "Male",
+    "country": "India",
+    "amount": 3231.0,
+    "avatar": "https://images.unsplash.com/photo-1480429370139-e0132c086e2a?w=150&h=150&fit=crop&crop=face",
+    "created_at": "2025-10-23T14:53:53.174421"
+  }
+}

@@ -1,0 +1,2961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Optimised Stock Guider 2025</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+    :root {
+      --glass: rgba(0,0,0,0.85);
+      --accent: #00eaff;
+      --purple: #6a5acd;
+      --success: #00ff88;
+      --danger: #ff6b6b;
+      --warning: #ffd86b;
+      --golden: #FFD700;
+      --golden-light: #FFF8DC;
+    }
+    
+    *{box-sizing:border-box}
+    
+    body {
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      margin: 0; padding: 0; color: #fff;
+      background: linear-gradient(180deg,#091126 0%, #00121a 100%);
+      overflow-x: hidden;
+    }
+    
+    body.auth-bg {
+      background-image: url("https://wallpaperaccess.com/full/5838964.jpg");
+      background-size: cover; 
+      background-attachment: fixed;
+      background-position: center;
+    }
+    
+    body.main-bg {
+      background-image: url("https://www.bing.com/th/id/OGC.53cd7751fba7083d2474fe1c9e91828d?pid=1.7&rurl=https%3a%2f%2fwww.gifcen.com%2fwp-content%2fuploads%2f2022%2f04%2fwallpaper-gif-4.gif&ehk=dHEs%2f07bkvbhFWnLtWKeONsAfSOD%2b9r%2bhGmNJCZELJA%3d");
+      background-size: cover; 
+      background-attachment: fixed;
+      background-position: center;
+    }
+    
+    .container {
+      width: 520px; 
+      margin: 90px auto; 
+      background: var(--glass);
+      padding: 30px; 
+      border-radius: 25px;
+      box-shadow: 0 15px 50px rgba(0,0,0,0.9), 
+                  0 0 40px rgba(0,255,255,0.15) inset,
+                  0 0 100px rgba(255,215,0,0.1) inset;
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255,255,255,0.15);
+      animation: containerGlow 4s ease-in-out infinite alternate;
+    }
+    
+    @keyframes containerGlow {
+      0% { box-shadow: 0 15px 50px rgba(0,0,0,0.9), 0 0 40px rgba(0,255,255,0.15) inset; }
+      100% { box-shadow: 0 20px 60px rgba(0,0,0,1), 0 0 60px rgba(0,255,255,0.25) inset; }
+    }
+    
+    input, select, button {
+      width: 100%; 
+      margin: 15px 0; 
+      padding: 16px;
+      border-radius: 15px; 
+      border: 1px solid rgba(255,255,255,0.25);
+      outline: none; 
+      font-size: 15px;
+      background: rgba(0,0,0,0.7); 
+      color: #fff;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    
+    input:focus, select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 25px rgba(0,234,255,0.5),
+                  0 0 15px rgba(255,215,0,0.3);
+      transform: scale(1.02);
+    }
+    
+    select option { 
+      color:#000; 
+      background: #fff;
+    }
+    
+    button {
+      background: linear-gradient(135deg, var(--purple), var(--accent));
+      color: #fff; 
+      font-weight: 700; 
+      cursor: pointer;
+      padding: 14px; 
+      border: none;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.6s;
+    }
+    
+    button:hover::before {
+      left: 100%;
+    }
+    
+    button:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 12px 35px rgba(0,234,255,0.6),
+                  0 0 30px rgba(255,215,0,0.4);
+      background: linear-gradient(135deg, var(--accent), var(--success));
+    }
+    
+    .hidden {display:none;}
+    /* Modal Styles */
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, rgba(0,0,0,0.95), rgba(30,30,30,0.98));
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 20px;
+    width: 80%;
+    max-width: 600px;
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 50px rgba(0,234,255,0.3);
+    animation: modalSlideIn 0.5s ease-out;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    z-index: 10;
+}
+
+.close:hover {
+    color: var(--danger);
+}
+    .tabs {
+      display:flex; 
+      justify-content: space-around; 
+      margin-bottom:25px;
+      background: rgba(0,0,0,0.4);
+      padding: 10px;
+      border-radius: 15px;
+    }
+    
+    .tabs button {
+      flex:1; 
+      margin:0 8px; 
+      background:rgba(255,255,255,0.1);
+      transition: all 0.4s ease;
+    }
+    
+    .tabs button.active {
+      background: linear-gradient(135deg, var(--purple), var(--accent));
+      box-shadow: 0 5px 20px rgba(0,234,255,0.4);
+      transform: scale(1.05);
+    }
+    
+    .colorful {
+      font-size:28px; 
+      font-weight:900; 
+      text-align:center; 
+      margin:0 0 15px 0;
+      background: linear-gradient(135deg,#ff6b6b,#ffd86b,#76f1d7,#6b9bff,#ff6b6b);
+      -webkit-background-clip:text; 
+      -webkit-text-fill-color:transparent;
+      background-size: 300% 300%;
+      animation: gradientShift 3s ease infinite;
+      text-shadow: 0 0 30px rgba(255,255,255,0.3);
+    }
+    
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Ticker/Roller */
+    #ticker-wrap {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 40;
+      background: linear-gradient(135deg, rgba(0,0,0,0.8), rgba(20,20,20,0.6));
+      padding: 12px 0;
+      overflow: hidden;
+      border-bottom: 2px solid rgba(255,255,255,0.2);
+      box-shadow: 0 5px 25px rgba(0,0,0,0.6);
+      backdrop-filter: blur(8px);
+      border-radius: 0 0 15px 15px;
+    }
+
+    #ticker {
+      display: flex;
+      gap: 50px;
+      animation: marquee 30s linear infinite;
+      will-change: transform;
+    }
+
+    #ticker.paused {
+      animation-play-state: paused;
+    }
+
+    .ticker-item {
+      white-space: nowrap;
+      padding: 0 15px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #00eaff;
+      text-shadow: 0 0 10px rgba(0,234,255,0.5), 0 0 5px rgba(0,255,136,0.3);
+      opacity: 0;
+      animation: fadeInTicker 0.5s ease-in forwards;
+      transition: transform 0.3s ease, opacity 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .ticker-item:hover {
+      transform: scale(1.1) translateY(-2px);
+      text-shadow: 0 0 20px rgba(0,234,255,0.8), 0 0 10px rgba(0,255,136,0.5);
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    @keyframes fadeInTicker {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .up { color: var(--success); text-shadow: 0 0 15px rgba(0,255,136,0.7); }
+    .down { color: var(--danger); text-shadow: 0 0 15px rgba(255,107,107,0.7); }
+
+    /* Top/Bottom Movers */
+    #topMover, #bottomMover {
+      position: fixed; 
+      z-index: 41;
+      background: linear-gradient(135deg, rgba(0,0,0,0.95), rgba(50,50,50,0.9));
+      padding: 15px; 
+      border-radius: 20px; 
+      font-weight: 700; 
+      font-size: 14px;
+      max-width: 320px; 
+      white-space: nowrap; 
+      overflow: hidden; 
+      text-overflow: ellipsis;
+      border: 2px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 10px 35px rgba(0,0,0,0.6);
+      animation: floatUpDown 3s ease-in-out infinite;
+      transition: opacity 0.5s ease;
+    }
+    
+    @keyframes floatUpDown {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+    }
+    
+    #topMover { 
+      top: 90px; 
+      left: 30px; 
+      border-left: 4px solid var(--success);
+    }
+    
+    #bottomMover { 
+      top: 90px; 
+      right: 30px; 
+      border-left: 4px solid var(--danger);
+    }
+
+    @keyframes borderGlow {
+      0% {
+        border-color: #00FF00;
+        box-shadow: 0 0 10px #00FF00;
+      }
+      25% {
+        border-color: #00FFFF;
+        box-shadow: 0 0 10px #00FFFF;
+      }
+      50% {
+        border-color: #FF00FF;
+        box-shadow: 0 0 10px #FF00FF;
+      }
+      75% {
+        border-color: #FFFF00;
+        box-shadow: 0 0 10px #FFFF00;
+      }
+      100% {
+        border-color: #00FF00;
+        box-shadow: 0 0 10px #00FF00;
+      }
+    }
+
+    #marketStatus {
+      position: absolute;
+      top: 70px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 41;
+      background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(50,50,50,0.9));
+      padding: 12px 25px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 16px;
+      color: #00FF00;
+      border: 2px solid #00FF00;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 0 30px rgba(0,255,0,0.5);
+      animation: borderGlow 3s infinite;
+    }
+
+    @keyframes pulseWarning {
+      0%, 100% { transform: translateX(-50%) scale(1); }
+      50% { transform: translateX(-50%) scale(1.05); }
+    }
+
+    /* Side Panels */
+    .side-panel {
+      position: fixed; 
+      top: 140px; 
+      width: 320px; 
+      max-height: 75%;
+      background: linear-gradient(135deg, rgba(0,0,0,0.9), rgba(30,30,30,0.85));
+      padding: 25px; 
+      border-radius: 20px;
+      overflow-y: auto; 
+      font-size: 15px; 
+      z-index: 20;
+      border: 2px solid rgba(255,255,255,0.15);
+      backdrop-filter: blur(25px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+      animation: slideInFromSide 1s ease-out;
+    }
+    
+    @keyframes slideInFromSide {
+      from { 
+        opacity: 0; 
+        transform: translateX(-50px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateX(0); 
+      }
+    }
+    
+    #leftPanel { 
+      left: 25px; 
+      animation: slideInFromSide 1s ease-out;
+    }
+    
+    #rightPanel { 
+      right: 25px; 
+      animation: slideInFromSide 1s ease-out 0.2s both;
+    }
+    
+    .side-panel h3 { 
+      color: var(--accent); 
+      margin:0 0 20px 0; 
+      font-size: 18px; 
+      text-align: center; 
+      text-shadow: 0 0 15px rgba(0,234,255,0.5);
+    }
+    
+    .side-panel li { 
+      margin: 12px 0; 
+      display:flex; 
+      justify-content:space-between; 
+      padding:15px; 
+      border-radius:12px; 
+      background:rgba(255,255,255,0.08); 
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      border: 1px solid rgba(255,255,255,0.1);
+      opacity: 0;
+      animation: fadeInItem 0.5s ease forwards;
+    }
+    
+    .side-panel li:hover { 
+      background:rgba(255,255,255,0.15); 
+      transform: translateX(8px) scale(1.03);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    }
+    
+    @keyframes fadeInItem {
+      0% { opacity: 0; transform: translateX(-10px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+
+    /* GIF Styling */
+    .panel-gif {
+      width: 100%;
+      height: 140px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      object-fit: cover;
+      border: 2px solid rgba(255,255,255,0.2);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+      transition: all 0.4s ease;
+    }
+    
+    .panel-gif:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 35px rgba(0,0,0,0.7);
+    }
+    
+    .bull-gif { 
+      border-left: 5px solid var(--success);
+      animation: bullPulse 3s infinite;
+    }
+    
+    .bear-gif { 
+      border-left: 5px solid var(--danger);
+      animation: bearPulse 3s infinite;
+    }
+    
+    @keyframes bullPulse {
+      0%, 100% { border-left-color: var(--success); }
+      50% { border-left-color: #7CFC00; }
+    }
+    
+    @keyframes bearPulse {
+      0%, 100% { border-left-color: var(--danger); }
+      50% { border-left-color: #FF4500; }
+    }
+
+    /* Enhanced Professional Profile Card */
+    #profileCard {
+      background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,193,37,0.25));
+      padding: 25px; 
+      border-radius: 20px;
+      margin-bottom: 25px; 
+      font-size: 15px;
+      border: 2px solid rgba(255,215,0,0.3);
+      backdrop-filter: blur(20px);
+      animation: goldenGlow 4s ease-in-out infinite alternate, slideInUp 0.8s ease-out;
+      box-shadow: 0 10px 35px rgba(255,215,0,0.2),
+                  inset 0 0 50px rgba(255,215,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    #profileCard::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,215,0,0.05) 0%, rgba(255,215,0,0) 70%);
+      z-index: -1;
+    }
+    
+    @keyframes goldenGlow {
+      0% { 
+        box-shadow: 0 10px 35px rgba(255,215,0,0.2),
+                    inset 0 0 50px rgba(255,215,0,0.1);
+      }
+      100% { 
+        box-shadow: 0 15px 45px rgba(255,215,0,0.4),
+                    inset 0 0 70px rgba(255,215,0,0.2);
+      }
+    }
+    
+    .profile-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      animation: fadeInUp 1s ease-out;
+    }
+    
+    .profile-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--golden), #FFA500);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 20px;
+      box-shadow: 0 5px 20px rgba(255,215,0,0.4);
+      animation: avatarPulse 2s infinite;
+      border: 3px solid rgba(255, 255, 255, 0.2);
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .profile-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    
+    @keyframes avatarPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    .profile-info {
+      flex: 1;
+    }
+    
+    .profile-name {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 0 0 5px 0;
+      color: var(--golden);
+      text-shadow: 0 0 10px rgba(255,215,0,0.5);
+    }
+    
+    .profile-email {
+      font-size: 14px;
+      color: rgba(255,255,255,0.8);
+      margin: 0;
+    }
+    
+    .profile-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .detail-item {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 15px;
+      border-radius: 12px;
+      border-left: 3px solid var(--golden);
+      transition: all 0.3s ease;
+    }
+    
+    .detail-item:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-3px);
+    }
+    
+    .detail-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .detail-value {
+      font-size: 16px;
+      font-weight: 500;
+      color: #fff;
+    }
+    
+    .editable {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .edit-icon {
+      color: var(--golden);
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+    
+    .edit-icon:hover {
+      opacity: 1;
+    }
+    
+    .profile-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .stat-item {
+      background: rgba(255,255,255,0.1);
+      padding: 12px;
+      border-radius: 12px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.3s ease;
+      animation: statSlideIn 0.6s ease-out;
+    }
+    
+    .stat-item:hover {
+      background: rgba(255,255,255,0.15);
+      transform: translateY(-3px);
+    }
+    
+    @keyframes statSlideIn {
+      from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0); 
+      }
+    }
+
+    /* Delete Account Button */
+    .delete-account-btn {
+      background: linear-gradient(135deg, #ff6b6b, #c23616) !important;
+      margin-top: 20px;
+      border: 2px solid rgba(255,107,107,0.3);
+    }
+    
+    .delete-account-btn:hover {
+      background: linear-gradient(135deg, #ff5252, #b33939) !important;
+      box-shadow: 0 12px 35px rgba(255,107,107,0.6) !important;
+    }
+
+    /* Animations */
+    .fade-in { 
+      animation: fadeIn 1.2s ease-in-out; 
+    }
+    
+    @keyframes fadeIn { 
+      from {
+        opacity:0; 
+        transform: translateY(-40px) scale(0.9);
+      } 
+      to {
+        opacity:1; 
+        transform: translateY(0) scale(1);
+      } 
+    }
+    
+    @keyframes slideInUp {
+      from { 
+        opacity: 0; 
+        transform: translateY(40px) rotateX(-10deg);
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0) rotateX(0);
+      }
+    }
+    
+    @keyframes glow {
+      0% { box-shadow: 0 0 10px var(--accent); }
+      50% { box-shadow: 0 0 30px var(--accent); }
+      100% { box-shadow: 0 0 10px var(--accent); }
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      33% { transform: translateY(-15px) rotate(1deg); }
+      66% { transform: translateY(-8px) rotate(-1deg); }
+    }
+
+    /* About Us */
+    #aboutUs {
+      margin-top: 25px; 
+      font-size: 14px; 
+      background: rgba(0,0,0,0.5);
+      padding: 20px; 
+      border-radius: 15px;
+      border-left: 5px solid var(--accent);
+      animation: slideInUp 1s ease-out 0.5s both;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    #aboutUs:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0,234,255,0.2);
+    }
+    
+    #aboutUs b { 
+      color: var(--accent);
+      text-shadow: 0 0 10px rgba(0,234,255,0.5);
+    }
+
+    /* Button Container */
+    .button-container {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 25px 0;
+    }
+    
+    .button-container button {
+      flex: 1;
+      min-width: 120px;
+      font-size: 14px;
+      padding: 12px;
+      animation: buttonSlideIn 0.6s ease-out;
+    }
+    
+    @keyframes buttonSlideIn {
+      from { 
+        opacity: 0; 
+        transform: translateY(30px) scale(0.8); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+      }
+    }
+
+    /* Error Message */
+    .error {
+      color: var(--danger);
+      font-size: 15px;
+      text-align: center;
+      margin: 12px 0;
+      padding: 12px;
+      background: rgba(255,107,107,0.15);
+      border-radius: 10px;
+      border-left: 4px solid var(--danger);
+      animation: shake 0.5s ease-in-out;
+    }
+    
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    /* Loading Indicator */
+    .loading {
+      display: inline-block;
+      width: 25px;
+      height: 25px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: var(--accent);
+      animation: spin 1s ease-in-out infinite, pulse 2s infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Stock Trend Indicator */
+    .trend-up {
+      color: var(--success);
+      text-shadow: 0 0 15px rgba(0,255,136,0.6);
+      animation: trendPulse 2s infinite;
+    }
+    
+    .trend-down {
+      color: var(--danger);
+      text-shadow: 0 0 15px rgba(255,107,107,0.6);
+      animation: trendPulse 2s infinite;
+    }
+    
+    @keyframes trendPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    
+    /* Investment Recommendation */
+    .investment-rec {
+      background: linear-gradient(135deg, rgba(0,0,0,0.5), rgba(30,30,30,0.6));
+      padding: 25px;
+      border-radius: 15px;
+      margin-top: 25px;
+      border-left: 5px solid var(--accent);
+      animation: slideInUp 1s ease-out, glow 3s infinite;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .investment-rec::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0,234,255,0.1), transparent);
+      animation: shimmer 4s infinite;
+    }
+    
+    .investment-rec h4 {
+      margin: 0 0 20px 0;
+      color: var(--accent);
+      font-size: 20px;
+      text-shadow: 0 0 15px rgba(0,234,255,0.5);
+    }
+    
+    .profit-item {
+      background: rgba(255,255,255,0.08);
+      padding: 15px;
+      border-radius: 10px;
+      margin: 10px 0;
+      border-left: 4px solid var(--success);
+      animation: slideInRight 0.8s ease-out;
+      transition: all 0.3s ease;
+    }
+    
+    .profit-item:hover {
+      transform: translateX(5px);
+      background: rgba(255,255,255,0.12);
+    }
+    
+    .profit-item:nth-child(2) { 
+      border-left-color: var(--warning); 
+      animation-delay: 0.1s; 
+    }
+    
+    .profit-item:nth-child(3) { 
+      border-left-color: var(--accent); 
+      animation-delay: 0.2s; 
+    }
+    
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+    
+    @keyframes slideInRight {
+      from { 
+        opacity: 0; 
+        transform: translateX(50px) scale(0.9); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateX(0) scale(1); 
+      }
+    }
+    
+    /* Welcome Animation */
+    .welcome-animation {
+      text-align: center;
+      margin: 25px 0;
+      animation: welcomeGlow 3s ease-in-out infinite alternate;
+    }
+    
+    @keyframes welcomeGlow {
+      0% { 
+        text-shadow: 0 0 20px rgba(255,255,255,0.5),
+                     0 0 40px rgba(0,234,255,0.3);
+      }
+      100% { 
+        text-shadow: 0 0 30px rgba(255,255,255,0.8),
+                     0 0 60px rgba(0,234,255,0.5),
+                     0 0 80px rgba(255,215,0,0.3);
+      }
+    }
+    
+    /* Chart Container */
+    #chartBox {
+      background: linear-gradient(135deg, rgba(0,0,0,0.5), rgba(20,20,20,0.6));
+      padding: 20px;
+      border-radius: 15px;
+      margin: 25px 0;
+      border: 2px solid rgba(255,255,255,0.15);
+      position: relative;
+      overflow: hidden;
+      animation: slideInUp 1s ease-out;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.6);
+    }
+    
+    .chart-container {
+      position: relative;
+      height: 350px;
+      width: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .chart-zoom-controls {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      z-index: 10;
+      background: rgba(0,0,0,0.8);
+      padding: 8px;
+      border-radius: 8px;
+      display: flex;
+      gap: 5px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .chart-zoom-controls button {
+      background: var(--accent);
+      border: none;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      min-width: auto;
+      margin: 0;
+      transition: all 0.3s ease;
+    }
+    
+    .chart-zoom-controls button:hover {
+      background: var(--success);
+      transform: scale(1.1);
+    }
+    
+    /* Summary Box */
+    #summaryBox {
+      background: linear-gradient(135deg, rgba(0,0,0,0.5), rgba(30,30,30,0.6));
+      padding: 25px;
+      border-radius: 15px;
+      margin: 25px 0;
+      border-left: 5px solid var(--accent);
+      animation: slideInUp 1s ease-out;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.5);
+    }
+    
+    /* Success Message */
+    .success {
+      color: var(--success);
+      font-size: 15px;
+      text-align: center;
+      margin: 12px 0;
+      padding: 12px;
+      background: rgba(0,255,136,0.15);
+      border-radius: 10px;
+      border-left: 4px solid var(--success);
+      animation: successPulse 2s infinite;
+    }
+    
+    @keyframes successPulse {
+      0%, 100% { 
+        box-shadow: 0 0 10px rgba(0,255,136,0.3);
+      }
+      50% { 
+        box-shadow: 0 0 20px rgba(0,255,136,0.6);
+      }
+    }
+    
+    /* Main GIF */
+    .main-gif {
+      width: 100%;
+      height: 180px;
+      border-radius: 15px;
+      margin: 25px 0;
+      object-fit: cover;
+      border: 2px solid rgba(255,255,255,0.2);
+      animation: float 6s ease-in-out infinite;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.5);
+    }
+    
+    /* Greeting Text - FIXED VERSION */
+    .greeting-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        font-size: 22px;
+        font-weight: 700;
+        margin: 15px 0;
+        text-align: center;
+    }
+
+    .greeting-text-part {
+        background: linear-gradient(135deg, #FFD700, #FFA500, #FF6B6B);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+        background-size: 200% 200%;
+        animation: greetingGradient 4s ease infinite;
+    }
+
+    .greeting-emoji-part {
+        display: inline-block;
+        font-size: 24px;
+        /* Completely reset all styles for emojis */
+        background: none !important;
+        -webkit-text-fill-color: initial !important;
+        background-clip: initial !important;
+        color: initial !important;
+        text-shadow: none !important;
+        animation: emojiBounce 2s ease-in-out infinite;
+    }
+
+    @keyframes greetingGradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    @keyframes emojiBounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+    }
+    
+    /* Modal Styles */
+    .modal {
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.8);
+        backdrop-filter: blur(10px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-content {
+        background: linear-gradient(135deg, rgba(0,0,0,0.95), rgba(30,30,30,0.98));
+        margin: 5% auto;
+        padding: 30px;
+        border-radius: 20px;
+        width: 80%;
+        max-width: 600px;
+        border: 2px solid var(--accent);
+        box-shadow: 0 0 50px rgba(0,234,255,0.3);
+        animation: modalSlideIn 0.5s ease-out;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    @keyframes modalSlideIn {
+        from { transform: translateY(-50px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+
+    .close:hover {
+        color: var(--danger);
+    }
+
+    /* Enhanced About Section */
+    .about-section {
+        margin: 20px 0;
+        padding: 20px;
+        background: rgba(255,255,255,0.05);
+        border-radius: 15px;
+        border-left: 4px solid var(--accent);
+    }
+
+    .about-features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin: 20px 0;
+    }
+
+    .feature-item {
+        background: rgba(255,255,255,0.08);
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .feature-item:hover {
+        transform: translateY(-5px);
+        background: rgba(255,255,255,0.12);
+    }
+    
+    .bull-bear-container {
+      display: none;
+    }
+    
+    #ticker:hover {
+      animation-play-state: paused;
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        width: 95%;
+        margin: 60px auto;
+        padding: 20px;
+      }
+      
+      .side-panel {
+        position: relative;
+        width: 100%;
+        margin: 20px 0;
+      }
+      
+      #topMover, #bottomMover {
+        position: relative;
+        margin: 10px;
+        max-width: none;
+      }
+      
+      .profile-details {
+        grid-template-columns: 1fr;
+      }
+      
+      .profile-stats {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .modal-content {
+        width: 95%;
+        margin: 10% auto;
+        padding: 20px;
+      }
+    }
+    
+    /* Hide scrollbars */
+    body::-webkit-scrollbar,
+    .container::-webkit-scrollbar,
+    .side-panel::-webkit-scrollbar,
+    #ticker-wrap::-webkit-scrollbar,
+    #chartBox::-webkit-scrollbar,
+    .modal-content::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+        background: transparent;
+    }
+
+    body,
+    .container,
+    .side-panel,
+    #ticker-wrap,
+    #chartBox,
+    .modal-content {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        overflow: auto;
+    }
+  </style>
+</head>
+<body class="auth-bg">
+
+<!-- Ticker -->
+<div id="ticker-wrap"><div id="ticker"></div></div>
+
+<!-- Movers -->
+<div id="topMover" class="hidden"></div>
+<div id="bottomMover" class="hidden"></div>
+
+<!-- Market Status -->
+<div id="marketStatus" class="hidden">Market Closed</div>
+
+<!-- Panels -->
+<div id="leftPanel" class="side-panel hidden">
+  <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHc3MDJydnNtbXBxdHE4YWZlNDU0Zno2cWNyNWIxbWR3cjlpaHdxZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/nl5IxAAVrTjESpz5Yg/giphy.gif" 
+       alt="Bull Market" class="panel-gif bull-gif">
+  <h3>📈Highest Performing Stocks today</h3>
+  <ul id="buyList"></ul>
+</div>
+<div id="rightPanel" class="side-panel hidden">
+  <img src="https://media2.giphy.com/media/uiYSLlNLnJqz8GWzfn/giphy.gif" 
+       alt="Bear Market" class="panel-gif bear-gif">
+  <h3>📉Lowest Performing Stocks today</h3>
+  <ul id="fallList"></ul>
+</div>
+
+<!-- About Us Modal -->
+<div id="aboutModal" class="modal hidden">
+    <div class="modal-content">
+        <span class="close" onclick="closeAboutModal()">&times;</span>
+        <h2 style="color: var(--accent); text-align: center; margin-bottom: 30px;">About AI Optimised Stock Guider</h2>
+        <div id="aboutContent"></div>
+    </div>
+</div>
+
+<!-- Auth -->
+<div class="container" id="authSection">
+  <div class="tabs">
+    <button id="signupTab" class="active" onclick="showTab('signup')">Sign Up</button>
+    <button id="loginTab" onclick="showTab('login')">Login</button>
+  </div>
+  <form id="signupForm">
+    <input type="text" id="name" placeholder="Full Name" required>
+    <input type="email" id="emailSignup" placeholder="Email" required>
+    <input type="password" id="passwordSignup" placeholder="Password" required>
+    <select id="gender"><option value="">Select Gender</option><option>Male</option><option>Female</option></select>
+    <select id="country"><option value="">Select Country</option><option>India</option><option>USA</option><option>UK</option></select>
+    <input type="number" id="amount" placeholder="Planned Investment Amount" required>
+    <button type="submit">
+      Sign Up
+      <span class="loading hidden"></span>
+    </button>
+  </form>
+  <form id="loginForm" class="hidden">
+    <input type="email" id="emailLogin" placeholder="Email" required>
+    <input type="password" id="passwordLogin" placeholder="Password" required>
+    <button type="submit">
+      Login
+      <span class="loading hidden"></span>
+    </button>
+  </form>
+  <p id="authMessage" class="error"></p>
+</div>
+
+<!-- Main -->
+<div class="container hidden fade-in" id="mainSection">
+  <h1 class="colorful">Ai Optimised Stock Guider</h1>
+  
+  <!-- Main GIF -->
+  <img src="https://wallpaperaccess.com/full/395457.png" 
+       alt="Stock Market Graph" class="main-gif">
+  
+  <!-- Welcome Animation -->
+  <div class="welcome-animation" id="welcomeAnimation">
+    <div id="greeting"></div>
+  </div>
+  
+  <!-- Enhanced Professional Profile Card -->
+  <div id="profileCard"></div>
+  
+  <input type="text" id="stockInput" placeholder="Enter stock symbol (e.g. TSLA, HDFCBANK.NS)">
+  <div id="errorMessage" class="error hidden">Invalid stock ticker</div>
+  <div id="loadingIndicator" class="hidden"><span class="loading"></span> Analyzing...</div>
+  
+  <div class="button-container">
+    <button onclick="analyzeStock()">Analyze</button>
+    <button onclick="logout()">Logout</button>
+    <button onclick="previousData()">Previous Data</button>
+  </div>
+  
+  <div id="summaryBox"></div>
+  <div id="chartBox">
+    <div class="chart-zoom-controls">
+      <button onclick="zoomChart(0.1)">+</button>
+      <button onclick="zoomChart(-0.1)">-</button>
+      <button onclick="resetZoom()">Reset</button>
+    </div>
+    <div class="chart-container">
+      <canvas id="chartCanvas"></canvas>
+    </div>
+  </div>
+  
+  <div id="aboutUs">
+    <b>About Us:</b><br>
+    Developed by <b>Karthik BK</b>, Final Year PES Student.<br>
+    Thanks for using my app i am heartly welcoming you to my family 😊🤗🙏<br>
+    📧 Email: karthikabk2020@gmail.com
+  </div>
+</div>
+
+<script>
+const API_BASE = "http://192.168.0.113:5000/api";
+const STORAGE_CURRENT_USER = "stock_agent_current_user";
+let chart;
+let currentSymbol = "";
+let realTimeInterval = null;
+let eventSource = null;
+let currentZoom = 1;
+
+// Avatar URLs
+const maleAvatars = [
+    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
+    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
+    'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop&crop=face',
+    'https://images.unsplash.com/photo-1480429370139-e0132c086e2a?w=150&h=150&fit=crop&crop=face',
+    'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face',
+    'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face',
+    'https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=150&h=150&fit=crop&crop=face',
+    'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=150&h=150&fit=crop&crop=face'
+];
+
+const femaleAvatars = [
+    'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
+    'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
+    'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face',
+    'https://images.unsplash.com/photo-1534751516642-a1af1ef26a56?w=150&h=150&fit=crop&crop=face',
+    'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face',
+    'https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=150&h=150&fit=crop&crop=face',
+    'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&h=150&fit=crop&crop=face',
+    'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=150&h=150&fit=crop&crop=face'
+];
+
+// DOM elements
+const ticker = document.getElementById("ticker");
+const topMover = document.getElementById("topMover");
+const bottomMover = document.getElementById("bottomMover");
+const marketStatus = document.getElementById("marketStatus");
+const buyList = document.getElementById("buyList");
+const fallList = document.getElementById("fallList");
+const errorMessage = document.getElementById("errorMessage");
+const loadingIndicator = document.getElementById("loadingIndicator");
+const authMessage = document.getElementById("authMessage");
+const authSection = document.getElementById("authSection");
+const mainSection = document.getElementById("mainSection");
+const welcomeAnimation = document.getElementById("welcomeAnimation");
+const greetingElement = document.getElementById("greeting");
+
+// Utility functions
+function getCurrentUser() {
+    const userStr = localStorage.getItem(STORAGE_CURRENT_USER);
+    if (!userStr) return null;
+    
+    try {
+        const user = JSON.parse(userStr);
+        // Ensure all required fields exist
+        return {
+            name: user.name || 'User',
+            email: user.email || 'user@example.com',
+            country: user.country || 'Not specified',
+            gender: user.gender || 'Not specified',
+            amount: user.amount || 0,
+            avatar: user.avatar || assignRandomAvatar(user.gender)
+        };
+    } catch (error) {
+        console.error('Error parsing user data:', error);
+        return null;
+    }
+}
+
+function saveCurrentUser(user) {
+  localStorage.setItem(STORAGE_CURRENT_USER, JSON.stringify(user));
+}
+
+function clearCurrentUser() {
+  localStorage.removeItem(STORAGE_CURRENT_USER);
+}
+
+// FIXED GREETING FUNCTION
+function getGreeting(name) {
+    const h = new Date().getHours();
+    
+    let timeEmoji, timeText;
+    if (h < 12) {
+        timeEmoji = '🌅';
+        timeText = `Good Morning, ${name}!`;
+    } else if (h < 16) {
+        timeEmoji = '☀️';
+        timeText = `Good Afternoon, ${name}!`;
+    } else if (h < 18) {
+        timeEmoji = '🌇';
+
+        timeText = `Good Evening, ${name}!`;
+    } else {
+        timeEmoji = '🌙';
+        timeText = `Good Night, ${name}!`;
+    }
+    
+    const moneyEmojis = '💵💶🤑';
+    
+    return `
+        <div class="greeting-container">
+            <span class="greeting-text-part">${timeText}</span>
+            <span class="greeting-emoji-part">${timeEmoji}</span>
+            <span class="greeting-text-part">Its The Time To Grow Than we Think </span>
+            <span class="greeting-emoji-part">${moneyEmojis}</span>
+        </div>
+    `;
+}
+
+
+function currencySymbol() {
+  const u = getCurrentUser();
+  return u?.country === "India" ? "₹" : "$";
+}
+
+function isMarketOpen() {
+  const now = new Date();
+  const h = now.getHours();
+  const m = now.getMinutes();
+  const d = now.getDay();
+  if (d === 0 || d === 6) return false;
+  if (h < 9 || (h === 9 && m < 30) || h >= 16) return false;
+  return true;
+}
+
+// Avatar assignment function
+function assignRandomAvatar(gender) {
+    const avatars = gender.toLowerCase() === 'male' ? maleAvatars : femaleAvatars;
+    const randomIndex = Math.floor(Math.random() * avatars.length);
+    return avatars[randomIndex];
+}
+
+// Enhanced Professional Profile Card Renderer - FIXED
+function renderProfileCard(user) {
+    const avatarUrl = user.avatar || assignRandomAvatar(user.gender);
+    const riskProfile = user.amount > 10000 ? 'Aggressive' : user.amount > 5000 ? 'Moderate' : 'Conservative';
+    
+    return `
+    <div class="profile-header">
+        <div class="profile-avatar">
+            <img src="${avatarUrl}" alt="${user.name}'s Avatar">
+        </div>
+        <div class="profile-info">
+            <h3 class="profile-name">${user.name}</h3>
+            <p class="profile-email">${user.email}</p>
+            <p class="profile-email">${user.country} • ${user.gender}</p>
+        </div>
+    </div>
+    
+    <div class="profile-details">
+        <div class="detail-item">
+            <div class="detail-label">Investment Plan</div>
+            <div class="detail-value editable">
+                <input type="number" 
+                       id="investmentAmount" 
+                       value="${user.amount}" 
+                       style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.25);background:rgba(0,0,0,0.7);color:#fff;margin-top:5px;"
+                       onchange="updateInvestmentFromProfile()"
+                       onblur="updateInvestmentFromProfile()">
+                <span class="edit-icon">✏️</span>
+            </div>
+            <div style="font-size:10px;opacity:0.7;margin-top:5px;">Press Enter or click outside to save</div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label">Risk Profile</div>
+            <div class="detail-value" style="color:var(--warning);font-weight:600;">${riskProfile}</div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label">Member Since</div>
+            <div class="detail-value">${new Date().getFullYear()}</div>
+        </div>
+        <div class="detail-item">
+            <div class="detail-label">Status</div>
+            <div class="detail-value" style="color:var(--success);font-weight:600;">Active</div>
+        </div>
+    </div>
+    
+    <div class="profile-stats">
+        <div class="stat-item">
+            <div style="font-size:11px;opacity:0.7;">Portfolio Value</div>
+            <div style="font-weight:600;color:var(--accent);">${currencySymbol()}${(user.amount * 1.2).toLocaleString()}</div>
+        </div>
+        <div class="stat-item">
+            <div style="font-size:11px;opacity:0.7;">Total Returns</div>
+            <div style="font-weight:600;color:var(--success);">+20.5%</div>
+        </div>
+        <div class="stat-item">
+            <div style="font-size:11px;opacity:0.7;">Active Stocks</div>
+            <div style="font-weight:600;">8</div>
+        </div>
+        <div class="stat-item">
+            <div style="font-size:11px;opacity:0.7;">Success Rate</div>
+            <div style="font-weight:600;color:var(--success);">89%</div>
+        </div>
+    </div>
+    
+    <button class="delete-account-btn" onclick="deleteAccount()">
+        🗑️ Delete Account
+    </button>
+    `;
+}
+
+// API call helper
+// In your apiCall function, add better error handling
+async function apiCall(endpoint, options = {}) {
+  try {
+    const response = await fetch(`${API_BASE}${endpoint}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+      },
+      credentials: 'include', // This is important for sessions
+      ...options
+    });
+    
+    const data = await response.json();
+    
+    if (!response.ok) {
+      // If unauthorized, clear user and show auth interface
+      if (response.status === 401) {
+        clearCurrentUser();
+        showAuthInterface();
+        throw new Error('Session expired. Please login again.');
+      }
+      throw new Error(data.message || `API error: ${response.status}`);
+    }
+    
+    return data;
+  } catch (error) {
+    console.error("API call failed:", error);
+    throw error;
+  }
+}
+
+// Update the deleteAccount function
+async function deleteAccount() {
+    if (!confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+        return;
+    }
+
+    try {
+        const response = await apiCall('/delete-account', {
+            method: 'POST'
+        });
+
+        if (response.success) {
+            alert('Account deleted successfully');
+            clearCurrentUser();
+            showAuthInterface();
+        } else {
+            throw new Error(response.message);
+        }
+    } catch (error) {
+        if (error.message.includes('Session expired')) {
+            // Already handled by apiCall
+            return;
+        }
+        showError('Failed to delete account: ' + error.message);
+    }
+}
+async function refreshTicker() {
+  try {
+    if (isMarketOpen()) {
+      marketStatus.classList.add("hidden");
+    } else {
+      marketStatus.classList.remove("hidden");
+    }
+    
+    const data = await apiCall("/tickers");
+    
+    const existingTickers = Array.from(ticker.children).reduce((acc, el) => {
+      acc[el.dataset.symbol] = el;
+      return acc;
+    }, {});
+    
+    const newTickerItems = data.all.map((d, index) => {
+      const el = existingTickers[d.symbol] || document.createElement("div");
+      el.dataset.symbol = d.symbol;
+      el.className = `ticker-item ${d.pct >= 0 ? "up" : "down"}`;
+      el.innerHTML = `${d.symbol} ${d.pct >= 0 ? "▲" : "▼"} ${d.pct}% (${currencySymbol()}${d.price.toFixed(2)})`;
+      el.style.animationDelay = `${index * 0.1}s`;
+      return el;
+    });
+    
+    ticker.innerHTML = '';
+    newTickerItems.forEach(el => ticker.appendChild(el));
+    
+    const sortedGainers = data.gainers.sort((a, b) => b.pct - a.pct);
+    const sortedFallers = data.fallers.sort((a, b) => a.pct - b.pct);
+    
+    updateSidePanel(buyList, sortedGainers, "up");
+    updateSidePanel(fallList, sortedFallers, "down");
+    
+    if (data.all.length > 0) {
+      const topGainer = sortedGainers[0];
+      const topLoser = sortedFallers[0];
+      
+      if (topGainer) {
+        updateMover(topMover, `Bullish Stock: <span class="up">${topGainer.symbol} ▲ ${topGainer.pct}% (${currencySymbol()}${topGainer.price.toFixed(2)})</span>`);
+      }
+      
+      if (topLoser) {
+        updateMover(bottomMover, `Bearish Stock: <span class="down">${topLoser.symbol} ▼ ${topLoser.pct}% (${currencySymbol()}${topLoser.price.toFixed(2)})</span>`);
+      }
+    }
+  } catch (error) {
+    console.error("Failed to refresh ticker:", error);
+  }
+}
+
+function updateSidePanel(listElement, items, className) {
+  const existingItems = Array.from(listElement.children).reduce((acc, li) => {
+    acc[li.dataset.symbol] = li;
+    return acc;
+  }, {});
+  
+  const newItems = items.map((item, index) => {
+    const li = existingItems[item.symbol] || document.createElement("li");
+    li.dataset.symbol = item.symbol;
+    li.innerHTML = `${item.symbol}<span class="${className}">${item.pct}% (${currencySymbol()}${item.price.toFixed(2)})</span>`;
+    li.style.animationDelay = `${index * 0.1}s`;
+    return li;
+  });
+  
+  listElement.innerHTML = '';
+  newItems.forEach(li => listElement.appendChild(li));
+}
+
+function updateMover(element, content) {
+  element.style.opacity = '0';
+  setTimeout(() => {
+    element.innerHTML = content;
+    element.classList.remove("hidden");
+    element.style.opacity = '1';
+  }, 500);
+}
+
+// Chart zoom functions
+function zoomChart(amount) {
+  currentZoom += amount;
+  currentZoom = Math.max(0.5, Math.min(3, currentZoom));
+  if (chart) {
+    chart.canvas.style.transform = `scale(${currentZoom})`;
+    chart.canvas.style.transformOrigin = 'center center';
+  }
+}
+
+function resetZoom() {
+  currentZoom = 1;
+  if (chart) {
+    chart.canvas.style.transform = 'scale(1)';
+  }
+}
+
+function renderChart(data, title) {
+  if (chart) chart.destroy();
+  const ctx = document.getElementById("chartCanvas").getContext("2d");
+  
+  const labels = data.time_points;
+  const prices = data.time_points.map(t => data.today[t]);
+  const volumes = data.time_points.map(t => data.volume[t]);
+  
+  chart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: "Price",
+          data: prices,
+          borderColor: "rgba(0, 234, 255, 1)",
+          backgroundColor: "rgba(0, 234, 255, 0.1)",
+          borderWidth: 3,
+          fill: true,
+          tension: 0.4,
+          yAxisID: 'y'
+        },
+        {
+          label: "Volume",
+          data: volumes,
+          borderColor: "rgba(255, 215, 0, 0.8)",
+          backgroundColor: "rgba(255, 215, 0, 0.2)",
+          borderWidth: 2,
+          fill: true,
+          tension: 0.4,
+          yAxisID: 'y1',
+          type: 'bar'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {
+        mode: 'index',
+        intersect: false,
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: `${title} - Today's Price & Volume`,
+          color: '#fff',
+          font: {
+            size: 16,
+            weight: 'bold'
+          }
+        },
+        legend: {
+          labels: {
+            color: '#fff',
+            font: {
+              size: 12
+            }
+          }
+        },
+        tooltip: {
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          titleColor: '#00eaff',
+          bodyColor: '#fff',
+          borderColor: '#00eaff',
+          borderWidth: 1
+        }
+      },
+      scales: {
+        x: {
+          grid: {
+            color: 'rgba(255, 255, 255, 0.1)'
+          },
+          ticks: {
+            color: '#fff',
+            font: {
+              size: 11
+            }
+          }
+        },
+        y: {
+          type: 'linear',
+          display: true,
+          position: 'left',
+          grid: {
+            color: 'rgba(255, 255, 255, 0.1)'
+          },
+          ticks: {
+            color: '#fff',
+            font: {
+              size: 11
+            },
+            callback: function(value) {
+              return currencySymbol() + value.toFixed(2);
+            }
+          },
+          title: {
+            display: true,
+            text: 'Price',
+            color: '#fff'
+          }
+        },
+        y1: {
+          type: 'linear',
+          display: true,
+          position: 'right',
+          grid: {
+            drawOnChartArea: false,
+          },
+          ticks: {
+            color: 'rgba(255, 215, 0, 0.8)',
+            font: {
+              size: 11
+            },
+            callback: function(value) {
+              return (value / 1000).toFixed(0) + 'K';
+            }
+          },
+          title: {
+            display: true,
+            text: 'Volume',
+            color: 'rgba(255, 215, 0, 0.8)'
+          }
+        }
+      },
+      animation: {
+        duration: 1000,
+        easing: 'easeOutQuart'
+      }
+    }
+  });
+}
+
+// Authentication functions
+async function handleSignup(event) {
+    event.preventDefault();
+    const submitBtn = event.target.querySelector('button[type="submit"]');
+    const loading = submitBtn.querySelector('.loading');
+    
+    try {
+        submitBtn.disabled = true;
+        loading.classList.remove('hidden');
+        authMessage.textContent = '';
+        
+        const userData = {
+            name: document.getElementById('name').value.trim(),
+            email: document.getElementById('emailSignup').value.trim().toLowerCase(), // Normalize email
+            password: document.getElementById('passwordSignup').value,
+            gender: document.getElementById('gender').value,
+            country: document.getElementById('country').value,
+            amount: parseFloat(document.getElementById('amount').value) || 0
+        };
+        
+        console.log('Signup attempt with data:', { ...userData, password: '***' });
+        
+        const result = await apiCall('/signup', {
+            method: 'POST',
+            body: JSON.stringify(userData)
+        });
+        
+        if (result.success) {
+            console.log('Signup successful, storing user data');
+            // Store user data including email after successful signup
+            if (result.user) {
+                saveCurrentUser(result.user);
+            }
+            authMessage.textContent = 'Signup successful! Redirecting...';
+            authMessage.className = 'success';
+            
+            // Redirect to main interface after successful signup
+            setTimeout(() => {
+                showMainInterface();
+            }, 1500);
+            
+        } else {
+            throw new Error(result.message);
+        }
+    } catch (error) {
+        console.error('Signup error:', error);
+        authMessage.textContent = error.message;
+        authMessage.className = 'error';
+    } finally {
+        submitBtn.disabled = false;
+        loading.classList.add('hidden');
+    }
+}
+
+async function handleLogin(event) {
+    event.preventDefault();
+    const submitBtn = event.target.querySelector('button[type="submit"]');
+    const loading = submitBtn.querySelector('.loading');
+    
+    try {
+        submitBtn.disabled = true;
+        loading.classList.remove('hidden');
+        authMessage.textContent = '';
+        
+        const loginData = {
+            email: document.getElementById('emailLogin').value,
+            password: document.getElementById('passwordLogin').value
+        };
+        
+        const result = await apiCall('/login', {
+            method: 'POST',
+            body: JSON.stringify(loginData)
+        });
+        
+        if (result.success) {
+            // Store ALL user data including email - FIXED
+            const userData = {
+                name: result.name,
+                email: result.email || loginData.email,
+                country: result.country,
+                gender: result.gender,
+                amount: result.amount,
+                avatar: result.avatar
+            };
+            saveCurrentUser(userData);
+            showMainInterface();
+        } else {
+            throw new Error(result.message);
+        }
+    } catch (error) {
+        authMessage.textContent = error.message;
+        authMessage.className = 'error';
+    } finally {
+        submitBtn.disabled = false;
+        loading.classList.add('hidden');
+    }
+}
+
+async function logout() {
+  try {
+    await apiCall('/logout', { method: 'POST' });
+  } catch (error) {
+    console.error('Logout error:', error);
+  } finally {
+    clearCurrentUser();
+    showAuthInterface();
+  }
+}
+
+// Delete account function
+
+async function deleteAccount() {
+    if (!confirm('Are you sure you want to permanently delete your account? This action cannot be undone and all your data will be lost.')) {
+        return;
+    }
+
+    try {
+        console.log('Starting account deletion process...');
+        
+        const response = await apiCall('/delete-account', {
+            method: 'POST'
+        });
+
+        if (response.success) {
+            console.log('Account deletion successful');
+            alert('Account deleted successfully');
+            
+            // Clear all local storage
+            localStorage.clear();
+            sessionStorage.clear();
+            
+            // Force reload to clear any cached state
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+            
+        } else {
+            throw new Error(response.message);
+        }
+    } catch (error) {
+        console.error('Delete account error:', error);
+        
+        if (error.message.includes('Session expired') || error.message.includes('Not authenticated')) {
+            // User is not logged in, clear everything and show auth
+            clearCurrentUser();
+            showAuthInterface();
+            showError('Your session has expired. Please login again.');
+        } else {
+            showError('Failed to delete account: ' + error.message);
+        }
+    }
+}
+
+
+async function updateInvestmentFromProfile() {
+    const newAmount = parseFloat(document.getElementById('investmentAmount').value);
+    const user = getCurrentUser();
+    
+    console.log('Update investment called with amount:', newAmount);
+    
+    if (!user || isNaN(newAmount) || newAmount <= 0) {
+        showError('Please enter a valid investment amount');
+        return;
+    }
+    
+    try {
+        const result = await apiCall('/update-investment', {
+            method: 'POST',
+            body: JSON.stringify({ amount: newAmount })
+        });
+        
+        console.log('Update investment response:', result);
+        
+        if (result.success) {
+            user.amount = newAmount;
+            saveCurrentUser(user);
+            
+            const successMsg = document.createElement('div');
+            successMsg.className = 'success';
+            successMsg.textContent = 'Investment amount updated successfully!';
+            successMsg.style.marginTop = '10px';
+            
+            const profileCard = document.getElementById('profileCard');
+            
+            const existingMsgs = profileCard.querySelectorAll('.success, .error');
+            existingMsgs.forEach(msg => msg.remove());
+            
+            profileCard.appendChild(successMsg);
+            
+            setTimeout(() => successMsg.remove(), 3000);
+            
+            document.getElementById('profileCard').innerHTML = renderProfileCard(user);
+            
+        } else {
+            throw new Error(result.message);
+        }
+    } catch (error) {
+        console.error('Failed to update investment:', error);
+        showError('Failed to update investment amount: ' + error.message);
+    }
+}
+
+// Stock analysis functions - FIXED VALIDATION
+async function analyzeStock() {
+  const symbol = document.getElementById('stockInput').value.trim().toUpperCase();
+  
+  if (!symbol) {
+    showError('Please enter a stock symbol');
+    return;
+  }
+  
+  // FIXED: Better stock symbol validation that handles Indian stocks
+  if (!/^[A-Z]{1,10}(\.[A-Z]{2,5})?$/.test(symbol)) {
+    showError('Invalid stock symbol format. Examples: TSLA, AAPL, RELIANCE.NS, HDFCBANK.NS');
+    return;
+  }
+  
+  try {
+    currentSymbol = symbol;
+    errorMessage.classList.add('hidden');
+    loadingIndicator.classList.remove('hidden');
+    
+    const result = await apiCall('/analyze', {
+      method: 'POST',
+      body: JSON.stringify({ symbol: symbol })
+    });
+    
+    if (result.success) {
+      result.symbol = symbol;
+      renderAnalysisResult(result);
+      
+      const chartData = await apiCall(`/today?symbol=${symbol}`);
+      if (chartData.success) {
+        renderChart(chartData, symbol);
+      }
+      
+      startRealTimeUpdates(symbol);
+    } else {
+      throw new Error(result.message);
+    }
+  } catch (error) {
+    showError(error.message);
+  } finally {
+    loadingIndicator.classList.add('hidden');
+  }
+}
+
+function getUserCountry() {
+  // Try to get country from browser timezone
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  
+  if (timezone.includes("Asia/Calcutta") || timezone.includes("India")) {
+    return "India";
+  } else if (timezone.includes("America/New_York") || timezone.includes("America/")) {
+    return "USA";
+  } else if (timezone.includes("Europe/London") || timezone.includes("Europe/")) {
+    return "UK";
+  } else {
+    return "Unknown";
+  }
+}
+
+function isMarketClosedForUser() {
+  const userCountry = getUserCountry();
+  const now = new Date();
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const dayOfWeek = now.getDay();
+  
+  // Weekend check for all countries
+  if (dayOfWeek === 0 || dayOfWeek === 6) return true;
+  
+  if (userCountry === "India") {
+    // Indian market hours: 9:30 AM - 3:30 PM IST
+    const currentTime = hours * 60 + minutes;
+    const marketOpen = 9 * 60 + 30;  // 9:30 AM
+    const marketClose = 15 * 60 + 30; // 3:30 PM
+    return currentTime < marketOpen || currentTime >= marketClose;
+    
+  } else if (userCountry === "USA") {
+    // US market hours: 9:30 AM - 4:00 PM ET (not 4:30 PM)
+    const etTime = new Date(now.toLocaleString("en-US", {timeZone: "America/New_York"}));
+    const etHours = etTime.getHours();
+    const etMinutes = etTime.getMinutes();
+    const currentTime = etHours * 60 + etMinutes;
+    const marketOpen = 9 * 60 + 30;  // 9:30 AM
+    const marketClose = 16 * 60;     // 4:00 PM
+    return currentTime < marketOpen || currentTime >= marketClose;
+    
+  } else if (userCountry === "UK") {
+    // UK market hours: 8:00 AM - 4:30 PM GMT
+    const gmtTime = new Date(now.toLocaleString("en-US", {timeZone: "Europe/London"}));
+    const gmtHours = gmtTime.getHours();
+    const gmtMinutes = gmtTime.getMinutes();
+    const currentTime = gmtHours * 60 + gmtMinutes;
+    const marketOpen = 8 * 60;       // 8:00 AM
+    const marketClose = 16 * 60 + 30; // 4:30 PM
+    return currentTime < marketOpen || currentTime >= marketClose;
+  }
+  
+  return true;
+}
+
+function getMarketStatusMessage() {
+  const userCountry = getUserCountry();
+  const isClosed = isMarketClosedForUser();
+  const now = new Date();
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  
+  if (isClosed) {
+    if (userCountry === "India") {
+      const currentTime = hours * 60 + minutes;
+      const marketOpen = 9 * 60 + 30;
+      
+      if (currentTime < marketOpen) {
+        return '🌅 MARKET CLOSED - Opens at 9:30 AM IST And these are based on the Historical Data';
+      } else {
+        return '🌆 MARKET CLOSED - Closed at 3:30 PM IST. Reopens tomorrow 9:30 AM And these are based on the Historical Data';
+      }
+    } else if (userCountry === "USA") {
+      const etTime = new Date(now.toLocaleString("en-US", {timeZone: "America/New_York"}));
+      const etHours = etTime.getHours();
+      const etMinutes = etTime.getMinutes();
+      const currentTime = etHours * 60 + etMinutes;
+      const marketOpen = 9 * 60 + 30;
+      
+      if (currentTime < marketOpen) {
+        return '🌅 MARKET CLOSED - Opens at 9:30 AM ET And these are based on the Historical Data';
+      } else {
+        return '🌆 MARKET CLOSED - Closed at 4:00 PM ET. Reopens tomorrow 9:30 AM And these are based on the Historical Data';
+      }
+    } else if (userCountry === "UK") {
+      const gmtTime = new Date(now.toLocaleString("en-US", {timeZone: "Europe/London"}));
+      const gmtHours = gmtTime.getHours();
+      const gmtMinutes = gmtTime.getMinutes();
+      const currentTime = gmtHours * 60 + gmtMinutes;
+      const marketOpen = 8 * 60;
+      
+      if (currentTime < marketOpen) {
+        return '🌅 MARKET CLOSED - Opens at 8:00 AM GMT And these are based on the Historical Data';
+      } else {
+        return '🌆 MARKET CLOSED - Closed at 4:30 PM GMT. Reopens tomorrow 8:00 AM And these are based on the Historical Data';
+      }
+    }
+  } else {
+    if (userCountry === "India") {
+      return '📈 LIVE MARKET - Indian Market Hours: 9:30 AM - 3:30 PM IST';
+    } else if (userCountry === "USA") {
+      return '📊 LIVE MARKET - US Market Hours: 9:30 AM - 4:00 PM ET';
+    } else if (userCountry === "UK") {
+      return '📊 LIVE MARKET - UK Market Hours: 8:00 AM - 4:30 PM GMT';
+    }
+  }
+  
+  return '📊 Market Status';
+}
+function getSentimentEmoji(dailyChange) {
+  if (dailyChange > 2) return "🚀";
+  if (dailyChange > 0.5) return "📈";
+  if (dailyChange > -0.5) return "➡️";
+  if (dailyChange > -2) return "📉";
+  return "🔻";
+}
+
+function getSentimentText(dailyChange) {
+  if (dailyChange > 2) return "Very Bullish";
+  if (dailyChange > 0.5) return "Bullish";
+  if (dailyChange > -0.5) return "Neutral";
+  if (dailyChange > -2) return "Bearish";
+  return "Very Bearish";
+}
+
+function renderAnalysisResult(result) {
+  function safeToFixed(value, digits = 2) {
+    return (typeof value === "number" && !isNaN(value))
+      ? value.toFixed(digits)
+      : "0.00";
+  }
+
+  const symbol = result.symbol || currentSymbol;
+  const rec = result.recommendation;
+  const advice = result.advice;
+  const details = result.details || {};
+  const plannedAmount = result.planned_amount || 0;
+  const investmentRec = result.investment_recommendation || {};
+  const expectedProfit = result.expected_profit || {};
+  
+  let recColor, recIcon;
+  switch(rec) {
+    case "STRONG BUY":
+      recColor = "#00ff88";
+      recIcon = "🟢";
+      break;
+    case "BUY":
+      recColor = "#00ff88";
+      recIcon = "🟢";
+      break;
+    case "STRONG SELL":
+      recColor = "#ff6b6b";
+      recIcon = "🔴";
+      break;
+    case "SELL":
+      recColor = "#ff6b6b";
+      recIcon = "🔴";
+      break;
+    default:
+      recColor = "#ffd86b";
+      recIcon = "🟡";
+  }
+  
+  const profitColor = rec.includes("SELL") ? "var(--danger)" : 
+                     rec.includes("BUY") ? "var(--success)" : "var(--warning)";
+
+  const summaryBox = document.getElementById("summaryBox");
+  summaryBox.innerHTML = `
+    <div style="text-align: center; margin-bottom: 20px;">
+      <h2 style="color: ${recColor}; margin: 0; text-shadow: 0 0 20px ${recColor}80;">
+        ${recIcon} ${rec} Recommendation for ${symbol}
+      </h2>
+      <p style="color: #fff; font-size: 16px; margin: 10px 0 0 0;">${advice || ""}</p>
+    </div>
+    
+    <!-- Market Status Banner -->
+    ${result.market_status === "Closed" ? `
+    <div style="background: linear-gradient(135deg, #ff6b6b, #c23616); padding: 15px; border-radius: 10px; margin-bottom: 20px; text-align: center; border: 2px solid #ff6b6b;">
+      <h4 style="margin: 0; color: white; font-size: 18px;">🔒 MARKET CLOSED</h4>
+      <p style="margin: 5px 0 0 0; color: white; font-size: 14px;">${result.market_message || "Analysis based on latest available data. Check back when market opens."}</p>
+    </div>
+    ` : ''}
+    
+    <!-- Today's Sentiment -->
+    <div style="text-align: center; margin: 15px 0; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px; border: 2px solid ${details.daily_change >= 0 ? 'var(--success)' : 'var(--danger)'};">
+      <h4 style="color: var(--accent); margin: 0 0 10px 0; font-size: 18px;">
+        ${getSentimentEmoji(details.daily_change)} Today's Market Sentiment: ${getSentimentText(details.daily_change)}
+      </h4>
+      
+      <!-- Market Status based on user location and time -->
+      <div style="background: ${isMarketClosedForUser() ? 'rgba(0, 255, 136, 0.2)' : 'rgba(255, 255, 255, 0.1)'}; 
+                  padding: 12px; border-radius: 8px; margin: 10px 0; 
+                  border: ${isMarketClosedForUser() ? '2px solid #00ff88' : '1px solid var(--accent)'}; 
+                  ${isMarketClosedForUser() ? 'box-shadow: 0 0 20px #00ff88;' : ''}">
+        <p style="margin: 0; font-size: 14px; 
+                  color: ${isMarketClosedForUser() ? '#00ff88' : 'var(--accent)'}; 
+                  ${isMarketClosedForUser() ? 'font-weight: bold; text-shadow: 0 0 10px #00ff88;' : ''}">
+          ${getMarketStatusMessage()}
+        </p>
+      </div>
+      
+      <p style="margin: 0; font-size: 14px; color: ${details.daily_change >= 0 ? 'var(--success)' : 'var(--danger)'};">
+        <strong>${symbol}</strong> is trading <strong>${details.daily_change >= 0 ? 'up' : 'down'} ${Math.abs(details.daily_change)}%</strong> today
+      </p>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+      <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+        <h4 style="color: var(--accent); margin: 0 0 10px 0;">📊 Key Metrics</h4>
+        <p style="margin: 5px 0;">Current Price: <b>${currencySymbol()}${safeToFixed(details.current_price)}</b></p>
+        <p style="margin: 5px 0;">Daily Change: 
+          <b style="color: ${details.daily_change >= 0 ? 'var(--success)' : 'var(--danger)'}">
+            ${safeToFixed(details.daily_change)}%
+          </b>
+        </p>
+        <p style="margin: 5px 0;">Volatility: 
+          <b style="color: ${
+            details.volatility_level === 'Very High' ? 'var(--danger)' : 
+            details.volatility_level === 'High' ? 'var(--warning)' : 
+            details.volatility_level === 'Moderate' ? 'var(--accent)' : 'var(--success)'
+          }">
+            ${safeToFixed(details.volatility, 1)}% (${details.volatility_level})
+          </b>
+        </p>
+        <p style="margin: 5px 0;">Risk Level: 
+          <b style="color: ${
+            details.risk_level === 'High' ? 'var(--danger)' : 
+            details.risk_level === 'Medium-High' ? 'var(--warning)' : 
+            details.risk_level === 'Medium' ? 'var(--accent)' : 'var(--success)'
+          }">${details.risk_level || "N/A"}</b>
+        </p>
+      </div>
+      
+      <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+        <h4 style="color: var(--accent); margin: 0 0 10px 0;">💡 Analysis Reasons</h4>
+        <ul style="margin: 0; padding-left: 15px; font-size: 13px; max-height: 150px; overflow-y: auto;">
+          ${(details.reasons || []).map(reason => `<li>${reason}</li>`).join('')}
+        </ul>
+      </div>
+    </div>
+    
+    <!-- Investment Recommendation Section -->
+    <div class="investment-rec">
+      <h4>💰 Investment Recommendation</h4>
+      
+      <!-- Investment Amount Suggestion -->
+      <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; margin: 15px 0; border-left: 4px solid var(--accent);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+          <div>
+            <h5 style="margin: 0; color: var(--accent);">Recommended Investment</h5>
+            <p style="margin: 5px 0 0 0; font-size: 12px; opacity: 0.8;">${investmentRec.risk_text || 'Medium risk'} • ${investmentRec.allocation_percentage || '0'}% of your planned amount</p>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 24px; font-weight: bold; color: var(--success);">
+              ${currencySymbol()}${safeToFixed(investmentRec.recommended_amount || 0)}
+            </div>
+          </div>
+        </div>
+        
+        <!-- Investment Slider -->
+        <div style="margin: 20px 0;">
+          <label style="display: block; margin-bottom: 10px; font-size: 14px; color: var(--accent);">
+            Adjust Investment Amount:
+          </label>
+          <input type="range" 
+                 id="investmentSlider" 
+                 min="0" 
+                 max="${plannedAmount * 2}" 
+                 value="${investmentRec.recommended_amount || 0}" 
+                 step="100"
+                 style="width: 100%; height: 8px; border-radius: 5px; background: rgba(255,255,255,0.2); outline: none;"
+                 oninput="updateInvestmentDisplay(this.value)">
+          <div style="display: flex; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 5px;">
+            <span>${currencySymbol()}0</span>
+            <span id="sliderValue">${currencySymbol()}${safeToFixed(investmentRec.recommended_amount || 0)}</span>
+            <span>${currencySymbol()}${safeToFixed(plannedAmount * 2)}</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Time Period Selection -->
+      <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 12px; margin: 15px 0;">
+        <h5 style="margin: 0 0 15px 0; color: var(--accent);">📅 Select Time Period</h5>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+          <button class="time-period-btn active" onclick="selectTimePeriod('monthly', this)" data-period="monthly">
+            <div>📈 1 Month</div>
+            <div style="font-size: 12px; opacity: 0.8;">+${expectedProfit.monthly_return_pct || '0'}%</div>
+          </button>
+          <button class="time-period-btn" onclick="selectTimePeriod('quarterly', this)" data-period="quarterly">
+            <div>📊 3 Months</div>
+            <div style="font-size: 12px; opacity: 0.8;">+${expectedProfit.quarterly_return_pct || '0'}%</div>
+          </button>
+          <button class="time-period-btn" onclick="selectTimePeriod('annual', this)" data-period="annual">
+            <div>🚀 1 Year</div>
+            <div style="font-size: 12px; opacity: 0.8;">+${expectedProfit.annual_return_pct || '0'}%</div>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Profit Projection -->
+      <div id="profitProjection" style="background: linear-gradient(135deg, rgba(0,255,136,0.1), rgba(0,234,255,0.1)); padding: 20px; border-radius: 12px; border: 2px solid var(--success);">
+        <div style="text-align: center; margin-bottom: 15px;">
+          <h5 style="margin: 0; color: var(--success);">💡 Profit Projection (1 Month)</h5>
+          <p style="margin: 5px 0 0 0; font-size: 12px; opacity: 0.8;">Based on current analysis</p>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: center;">
+          <div class="profit-item">
+            <div style="font-size: 12px; opacity: 0.8;">Investment</div>
+            <div style="font-size: 18px; font-weight: bold; color: var(--accent);">
+              ${currencySymbol()}${safeToFixed(investmentRec.recommended_amount || 0)}
+            </div>
+          </div>
+          <div class="profit-item">
+            <div style="font-size: 12px; opacity: 0.8;">Expected Profit</div>
+            <div style="font-size: 18px; font-weight: bold; color: var(--success);">
+              +${currencySymbol()}${safeToFixed(expectedProfit.monthly || 0)}
+            </div>
+          </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 15px;">
+          <div style="font-size: 14px; color: var(--accent);">
+            Total: <strong>${currencySymbol()}${safeToFixed((investmentRec.recommended_amount || 0) + (expectedProfit.monthly || 0))}</strong>
+          </div>
+          <div style="font-size: 12px; opacity: 0.8; margin-top: 5px;">
+            Return: +${expectedProfit.monthly_return_pct || '0'}%
+          </div>
+        </div>
+      </div>
+      
+      <!-- Additional Time Period Profits -->
+      <div style="margin-top: 15px; font-size: 12px; opacity: 0.8; text-align: center;">
+        <div>Also consider: 
+          <span style="color: var(--warning);">3 Months: +${currencySymbol()}${safeToFixed(expectedProfit.quarterly || 0)}</span> • 
+          <span style="color: var(--success);">1 Year: +${currencySymbol()}${safeToFixed(expectedProfit.annual || 0)}</span>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// Helper functions for investment features
+function updateInvestmentDisplay(value) {
+  const sliderValue = document.getElementById('sliderValue');
+  const currentAmount = parseFloat(value);
+  
+  sliderValue.textContent = currencySymbol() + parseFloat(value).toLocaleString();
+  
+  // Update profit projection based on slider
+  updateProfitProjection(currentAmount);
+}
+
+function updateProfitProjection(investmentAmount) {
+  const profitProjection = document.getElementById('profitProjection');
+  if (!profitProjection) return;
+  
+  // Get current period
+  const activePeriod = document.querySelector('.time-period-btn.active')?.dataset.period || 'monthly';
+  
+  // Calculate new profits based on investment amount
+  const baseReturnRates = {
+    'monthly': 0.0125,  // 1.25% monthly (15% annual)
+    'quarterly': 0.0375, // 3.75% quarterly
+    'annual': 0.15      // 15% annual
+  };
+  
+  const returnRate = baseReturnRates[activePeriod] || 0.0125;
+  const profit = investmentAmount * returnRate;
+  const returnPct = (returnRate * 100).toFixed(1);
+  
+  let periodText = '';
+  let periodColor = 'var(--success)';
+  
+  switch(activePeriod) {
+    case 'monthly':
+      periodText = '1 Month';
+      periodColor = 'var(--success)';
+      break;
+    case 'quarterly':
+      periodText = '3 Months';
+      periodColor = 'var(--warning)';
+      break;
+    case 'annual':
+      periodText = '1 Year';
+      periodColor = 'var(--success)';
+      break;
+  }
+  
+  const profitHTML = `
+    <div style="text-align: center; margin-bottom: 15px;">
+      <h5 style="margin: 0; color: ${periodColor};">💡 Profit Projection (${periodText})</h5>
+      <p style="margin: 5px 0 0 0; font-size: 12px; opacity: 0.8;">Based on adjusted investment</p>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: center;">
+      <div class="profit-item">
+        <div style="font-size: 12px; opacity: 0.8;">Investment</div>
+        <div style="font-size: 18px; font-weight: bold; color: var(--accent);">
+          ${currencySymbol()}${investmentAmount.toLocaleString()}
+        </div>
+      </div>
+      <div class="profit-item">
+        <div style="font-size: 12px; opacity: 0.8;">Expected Profit</div>
+        <div style="font-size: 18px; font-weight: bold; color: ${periodColor};">
+          +${currencySymbol()}${profit.toFixed(2)}
+        </div>
+      </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 15px;">
+      <div style="font-size: 14px; color: var(--accent);">
+        Total: <strong>${currencySymbol()}${(investmentAmount + profit).toFixed(2)}</strong>
+      </div>
+      <div style="font-size: 12px; opacity: 0.8; margin-top: 5px;">
+        Return: +${returnPct}%
+      </div>
+    </div>
+  `;
+  
+  profitProjection.innerHTML = profitHTML;
+}
+
+function selectTimePeriod(period, element) {
+  // Remove active class from all buttons
+  document.querySelectorAll('.time-period-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  
+  // Add active class to clicked button
+  element.classList.add('active');
+  
+  // Update profit projection
+  const slider = document.getElementById('investmentSlider');
+  if (slider) {
+    updateProfitProjection(parseFloat(slider.value));
+  }
+}
+
+// Add CSS for time period buttons (add this to your existing CSS)
+const style = document.createElement('style');
+style.textContent = `
+  .time-period-btn {
+    background: rgba(255,255,255,0.1);
+    border: 2px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    padding: 12px 8px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 12px;
+  }
+
+  .time-period-btn:hover {
+    background: rgba(255,255,255,0.15);
+    transform: translateY(-2px);
+  }
+
+  .time-period-btn.active {
+    background: rgba(0,234,255,0.2);
+    border-color: var(--accent);
+    box-shadow: 0 0 15px rgba(0,234,255,0.3);
+  }
+`;
+document.head.appendChild(style);
+async function previousData() {
+  if (!currentSymbol) {
+    showError('Please analyze a stock first');
+    return;
+  }
+  
+  try {
+    loadingIndicator.classList.remove('hidden');
+    
+    const historyData = await apiCall(`/history?symbol=${currentSymbol}`);
+    if (historyData.success) {
+      document.getElementById('summaryBox').innerHTML = `
+        <div style="text-align: center; margin-bottom: 20px;">
+          <h2 style="color: var(--accent); margin: 0; text-shadow: 0 0 20px rgba(0,234,255,0.5);">
+            📊 Historical Data for ${currentSymbol}
+          </h2>
+          <p style="color: #fff; font-size: 16px; margin: 10px 0 0 0;">
+            1-Month Price History • High: ${currencySymbol()}${historyData.summary.high.toFixed(2)} • Low: ${currencySymbol()}${historyData.summary.low.toFixed(2)}
+          </p>
+        </div>
+      `;
+      
+      renderHistoricalChart(historyData, currentSymbol);
+      
+      if (realTimeInterval) {
+        clearInterval(realTimeInterval);
+        realTimeInterval = null;
+      }
+      if (eventSource) {
+        eventSource.close();
+        eventSource = null;
+      }
+    } else {
+      throw new Error(historyData.message);
+    }
+  } catch (error) {
+    showError(error.message);
+  } finally {
+    loadingIndicator.classList.add('hidden');
+  }
+}
+
+function renderHistoricalChart(data, symbol) {
+  if (chart) chart.destroy();
+  const ctx = document.getElementById("chartCanvas").getContext("2d");
+  
+  const labels = Object.keys(data.history);
+  const prices = Object.values(data.history);
+  
+  const avgPrice = prices.reduce((a, b) => a + b, 0) / prices.length;
+  const minPrice = Math.min(...prices);
+  const maxPrice = Math.max(...prices);
+  
+  chart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [{
+        label: `${symbol} Historical Price`,
+        data: prices,
+        borderColor: "rgba(0, 234, 255, 1)",
+        backgroundColor: "rgba(0, 234, 255, 0.1)",
+        borderWidth: 3,
+        fill: true,
+        tension: 0.1,
+        pointBackgroundColor: "rgba(255, 215, 0, 1)",
+        pointBorderColor: "rgba(255, 255, 255, 1)",
+        pointBorderWidth: 2,
+        pointRadius: 4,
+        pointHoverRadius: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        title: {
+          display: true,
+          text: `${symbol} - 1 Month Historical Price Data`,
+          color: '#fff',
+          font: {
+            size: 18,
+            weight: 'bold'
+          }
+        },
+        legend: {
+          labels: {
+            color: '#fff',
+            font: {
+              size: 12
+            }
+          }
+        },
+        tooltip: {
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          titleColor: '#00eaff',
+          bodyColor: '#fff',
+          borderColor: '#00eaff',
+          borderWidth: 1,
+          callbacks: {
+            label: function(context) {
+              return `Price: ${currencySymbol()}${context.parsed.y.toFixed(2)}`;
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: {
+            color: 'rgba(255, 255, 255, 0.1)'
+          },
+          ticks: {
+            color: '#fff',
+            font: {
+              size: 11
+            },
+            maxTicksLimit: 10
+          },
+          title: {
+            display: true,
+            text: 'Date',
+            color: '#fff'
+          }
+        },
+        y: {
+          grid: {
+            color: 'rgba(255, 255, 255, 0.1)'
+          },
+          ticks: {
+            color: '#fff',
+            font: {
+              size: 11
+            },
+            callback: function(value) {
+              return currencySymbol() + value.toFixed(2);
+            }
+          },
+          title: {
+            display: true,
+            text: 'Price',
+            color: '#fff'
+          }
+        }
+      },
+      interaction: {
+        intersect: false,
+        mode: 'index',
+      },
+      animation: {
+        duration: 1000,
+        easing: 'easeOutQuart'
+      }
+    }
+  });
+  
+  const chartBox = document.getElementById('chartBox');
+  const existingStats = chartBox.querySelector('.chart-stats');
+  if (existingStats) existingStats.remove();
+  
+  const statsDiv = document.createElement('div');
+  statsDiv.className = 'chart-stats';
+  statsDiv.style.cssText = `
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 15px;
+    padding: 15px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+  `;
+  
+  statsDiv.innerHTML = `
+    <div style="text-align: center;">
+      <div style="font-size: 12px; opacity: 0.7;">Highest</div>
+      <div style="color: var(--success); font-weight: bold; font-size: 14px;">${currencySymbol()}${maxPrice.toFixed(2)}</div>
+    </div>
+    <div style="text-align: center;">
+      <div style="font-size: 12px; opacity: 0.7;">Average</div>
+      <div style="color: var(--accent); font-weight: bold; font-size: 14px;">${currencySymbol()}${avgPrice.toFixed(2)}</div>
+    </div>
+    <div style="text-align: center;">
+      <div style="font-size: 12px; opacity: 0.7;">Lowest</div>
+      <div style="color: var(--danger); font-weight: bold; font-size: 14px;">${currencySymbol()}${minPrice.toFixed(2)}</div>
+    </div>
+  `;
+  
+  chartBox.appendChild(statsDiv);
+}
+
+function startRealTimeUpdates(symbol) {
+  if (realTimeInterval) {
+    clearInterval(realTimeInterval);
+  }
+  if (eventSource) {
+    eventSource.close();
+  }
+  
+  try {
+    eventSource = new EventSource(`${API_BASE}/stream?symbol=${symbol}`);
+    
+    eventSource.onmessage = function(event) {
+      const data = JSON.parse(event.data);
+      updateRealTimePrice(data);
+    };
+    
+    eventSource.onerror = function() {
+      console.log('EventSource failed, falling back to polling');
+      eventSource.close();
+      startPollingUpdates(symbol);
+    };
+  } catch (error) {
+    console.log('EventSource not supported, using polling');
+    startPollingUpdates(symbol);
+  }
+}
+
+function startPollingUpdates(symbol) {
+  realTimeInterval = setInterval(async () => {
+    try {
+      const data = await apiCall(`/realtime?symbol=${symbol}`);
+      updateRealTimePrice(data);
+    } catch (error) {
+      console.error('Real-time update failed:', error);
+    }
+  }, 5000);
+}
+
+function updateRealTimePrice(data) {
+  if (data.success) {
+    const tickerItem = document.querySelector(`.ticker-item[data-symbol="${currentSymbol}"]`);
+    if (tickerItem) {
+      const trendClass = data.pctChange >= 0 ? "up" : "down";
+      const trendIcon = data.pctChange >= 0 ? "▲" : "▼";
+      tickerItem.className = `ticker-item ${trendClass}`;
+      tickerItem.innerHTML = `${currentSymbol} ${trendIcon} ${data.pctChange.toFixed(2)}% (${currencySymbol()}${data.price.toFixed(2)})`;
+    }
+    
+    if (chart && chart.data.datasets[0].data.length > 0) {
+      const now = new Date();
+      const timeLabel = now.getHours().toString().padStart(2, '0') + ':' + 
+                       now.getMinutes().toString().padStart(2, '0');
+      
+      chart.data.labels.push(timeLabel);
+      chart.data.datasets[0].data.push(data.price);
+      
+      if (chart.data.labels.length > 50) {
+        chart.data.labels.shift();
+        chart.data.datasets[0].data.shift();
+      }
+      
+      chart.update('active');
+    }
+  }
+}
+
+// About modal functions - FIXED
+function showAboutModal() {
+    console.log('Opening About Modal');
+    fetchAboutInfo();
+    document.getElementById('aboutModal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+}
+
+function closeAboutModal() {
+    console.log('Closing About Modal');
+    document.getElementById('aboutModal').classList.add('hidden');
+    document.body.style.overflow = 'auto'; // Restore scrolling
+}
+
+async function fetchAboutInfo() {
+    try {
+        const response = await apiCall('/about');
+        if (response.success) {
+            renderAboutContent(response.about);
+        }
+    } catch (error) {
+        document.getElementById('aboutContent').innerHTML = `
+            <div class="error">Failed to load about information</div>
+        `;
+    }
+}
+
+function renderAboutContent(aboutData) {
+    const content = `
+        <div class="about-section">
+            <h3 style="color: var(--accent);">👨‍💻 Developer</h3>
+            <p><strong>Name:</strong> ${aboutData.developer.name}</p>
+            <p><strong>Education:</strong> ${aboutData.developer.education}</p>
+            <p><strong>Email:</strong> ${aboutData.developer.email}</p>
+            <p><strong>Role:</strong> ${aboutData.developer.role}</p>
+        </div>
+
+        <div class="about-section">
+            <h3 style="color: var(--accent);">🚀 Application</h3>
+            <p><strong>Name:</strong> ${aboutData.app.name}</p>
+            <p><strong>Version:</strong> ${aboutData.app.version}</p>
+            <p><strong>Description:</strong> ${aboutData.app.description}</p>
+        </div>
+
+        <div class="about-section">
+            <h3 style="color: var(--accent);">✨ Features</h3>
+            <div class="about-features">
+                ${aboutData.app.features.map(feature => `
+                    <div class="feature-item">
+                        <div style="font-size: 24px; margin-bottom: 10px;">${getFeatureEmoji(feature)}</div>
+                        <div>${feature}</div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h3 style="color: var(--accent);">🎯 Mission</h3>
+            <p>${aboutData.mission}</p>
+        </div>
+
+        <div class="about-section">
+            <h3 style="color: var(--accent);">📞 Contact</h3>
+            <p><strong>Email:</strong> ${aboutData.contact.email}</p>
+            <p><strong>Support:</strong> ${aboutData.contact.support}</p>
+        </div>
+    `;
+    
+    document.getElementById('aboutContent').innerHTML = content;
+}
+
+function getFeatureEmoji(feature) {
+    const emojiMap = {
+        'Real-time': '📈',
+        'AI-powered': '🤖',
+        'Interactive': '📊',
+        'Personalized': '👤',
+        'Market': '🔮',
+        'analysis': '🔍',
+        'recommendations': '💡',
+        'charts': '📈',
+        'management': '💼',
+        'predictions': '🔮'
+    };
+    
+    for (const [key, emoji] of Object.entries(emojiMap)) {
+        if (feature.toLowerCase().includes(key.toLowerCase())) return emoji;
+    }
+    return '⭐';
+}
+
+// UI management functions
+function showTab(tabName) {
+  document.getElementById('signupForm').classList.toggle('hidden', tabName !== 'signup');
+  document.getElementById('loginForm').classList.toggle('hidden', tabName !== 'login');
+  document.getElementById('signupTab').classList.toggle('active', tabName === 'signup');
+  document.getElementById('loginTab').classList.toggle('active', tabName === 'login');
+  authMessage.textContent = '';
+}
+
+function showError(message) {
+  errorMessage.textContent = message;
+  errorMessage.classList.remove('hidden');
+  setTimeout(() => {
+    errorMessage.classList.add('hidden');
+  }, 5000);
+}
+
+function showAuthInterface() {
+  authSection.classList.remove('hidden');
+  mainSection.classList.add('hidden');
+  document.getElementById('leftPanel').classList.add('hidden');
+  document.getElementById('rightPanel').classList.add('hidden');
+  document.body.className = 'auth-bg';
+  
+  if (realTimeInterval) {
+    clearInterval(realTimeInterval);
+    realTimeInterval = null;
+  }
+  if (eventSource) {
+    eventSource.close();
+    eventSource = null;
+  }
+}
+
+function showMainInterface() {
+    const user = getCurrentUser();
+    if (!user) {
+        showAuthInterface();
+        return;
+    }
+    
+    authSection.classList.add('hidden');
+    mainSection.classList.remove('hidden');
+    document.getElementById('leftPanel').classList.remove('hidden');
+    document.getElementById('rightPanel').classList.remove('hidden');
+    document.body.className = 'main-bg';
+    
+    greetingElement.innerHTML = getGreeting(user.name);
+    
+    document.getElementById('profileCard').innerHTML = renderProfileCard(user);
+    
+    refreshTicker();
+    setInterval(refreshTicker, 30000);
+    
+    animateWelcome();
+}
+
+function animateWelcome() {
+  const welcome = document.getElementById('welcomeAnimation');
+  welcome.style.animation = 'welcomeGlow 3s ease-in-out infinite alternate';
+  
+  setTimeout(() => {
+    welcome.style.transform = 'scale(1.05)';
+    welcome.style.transition = 'transform 0.5s ease';
+  }, 1000);
+}
+
+// Initialize application
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('signupForm').addEventListener('submit', handleSignup);
+  document.getElementById('loginForm').addEventListener('submit', handleLogin);
+  
+  const user = getCurrentUser();
+  if (user) {
+    showMainInterface();
+  } else {
+    showAuthInterface();
+  }
+  
+  document.getElementById('stockInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      analyzeStock();
+    }
+  });
+  
+  ticker.addEventListener('mouseenter', () => {
+    ticker.classList.add('paused');
+  });
+  
+  ticker.addEventListener('mouseleave', () => {
+    ticker.classList.remove('paused');
+  });
+  
+  // Make about section clickable - FIXED
+  const aboutSection = document.getElementById('aboutUs');
+  if (aboutSection) {
+      aboutSection.style.cursor = 'pointer';
+      aboutSection.addEventListener('click', showAboutModal);
+  }
+  
+  // Close modal when clicking outside - FIXED
+  const aboutModal = document.getElementById('aboutModal');
+  if (aboutModal) {
+      aboutModal.addEventListener('click', function(event) {
+          if (event.target === aboutModal) {
+              closeAboutModal();
+          }
+      });
+  }
+  
+  // Close modal with Escape key - FIXED
+  document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+          closeAboutModal();
+      }
+  });
+  
+  console.log('Stock Agent Pro initialized successfully!');
+});
+
+// Export functions for global access
+window.analyzeStock = analyzeStock;
+window.logout = logout;
+window.previousData = previousData;
+window.showTab = showTab;
+window.zoomChart = zoomChart;
+window.resetZoom = resetZoom;
+window.updateInvestmentFromProfile = updateInvestmentFromProfile;
+window.deleteAccount = deleteAccount;
+window.showAboutModal = showAboutModal;
+window.closeAboutModal = closeAboutModal;
+</script>
+</body>
+</html>
