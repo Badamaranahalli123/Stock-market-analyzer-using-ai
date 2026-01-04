@@ -33,8 +33,6 @@ if not os.path.exists(USERS_FILE):
     with open(USERS_FILE, 'w') as f:
         json.dump({}, f)
 
-MAIL_USERNAME = "stockagentforyourservice@gmail.com"
-MAIL_PASSWORD = "kddb fpip mpdm clzk"
 
 # Enhanced Avatar URLs
 MALE_AVATARS = [
@@ -1244,4 +1242,5 @@ if __name__ == "__main__":
         print("└── frontend/")
         print("    └── index.html")
     
+
     app.run(host="192.168.0.113", port=5000, debug=True)
